@@ -1,6 +1,6 @@
 {
     "name": "nopenopenope/webroot-installer",
-    "type": "composer-installer",
+    "type": "composer-plugin",
     "license": "BSD-3-Clause",
     "description": "A composer installer for libraries that live in an application webroot.",
     "authors": [
