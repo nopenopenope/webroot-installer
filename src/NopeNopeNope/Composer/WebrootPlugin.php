@@ -8,7 +8,7 @@ use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 
-final class WebrootInstaller implements PluginInterface
+final class WebrootPlugin implements PluginInterface
 {
     private const EXTENSIONS = [
         ExtensionInstaller::class
