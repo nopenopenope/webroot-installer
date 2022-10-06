@@ -1,3 +1,5 @@
+![CI Status](https://github.com/nopenopenope/webroot-installer/actions/workflows/docker-image.yml/badge.svg)
+
 # A Webroot [Composer](http://getcomposer.org) Library Installer
 
 This is for PHP packages that support composer to configure in their `composer.json`.  It will
