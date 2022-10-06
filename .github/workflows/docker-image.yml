@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: php:8.1-cli-buster
-      volumes:
-      - $GITHUB_WORKSPACE:/var/www/html
+      options: -v ${{ github.workspace }}:/var/www/html
     steps:
     - uses: actions/checkout@v3
     - name: Set Up Container
