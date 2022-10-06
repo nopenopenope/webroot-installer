@@ -4,6 +4,28 @@ This is for PHP packages that support composer to configure in their `composer.j
 allow a root package to define a webroot directory and webroot package and magically install it
 in the correct location.
 
+## Installation
+
+This repository is a fork of [Fancyguy/Webroot-Installer](https://github.com/nopenopenope/webroot-installer), so its not commited to packagist and you cannot install it via an unmodified composer require.
+
+If you want to add this updated fork to your `composer.json`, you have to add the VCS declaration to your `repositories` node manually:
+
+``` json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:nopenopenope/webroot-installer.git",
+        "only": ["nopenopenope/webroot-installer"]
+    }
+],
+```
+
+Afterwards, you can proceed with the regular require command:
+``` bash
+composer require nopenopenope/webroot-installer:8.1.11
+```
+
+
 ## Example `composer.json` File
 
 ``` json
@@ -22,7 +44,7 @@ in the correct location.
     ],
     "repositories": [
         {
-            "type": "package",
+            "type": "project",
             "package": {
                 "name": "wordpress/wordpress",
                 "type": "webroot",
@@ -35,6 +57,11 @@ in the correct location.
                     "nopenopenope/webroot-installer": "^1.0"
                 }
             }
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:nopenopenope/webroot-installer.git",
+            "only": ["nopenopenope/webroot-installer"]
         }
     ],
     "require": {
