@@ -6,17 +6,15 @@ namespace NopeNopeNope\Composer\Test;
 
 use Composer\Downloader\DownloadManager;
 use Composer\IO\IOInterface;
-use Composer\Semver\Constraint\ConstraintInterface;
 use InvalidArgumentException;
-use NopeNopeNope\Composer\WebrootInstaller;
+use NopeNopeNope\Composer\ExtensionInstaller;
 use Composer\Package\RootPackage;
 use Composer\Package\Package;
 use Composer\Util\Filesystem;
 use Composer\Composer;
 use Composer\Config;
-use TypeError;
 
-final class WebrootInstallerTest extends TestCase
+final class ExtensionInstallerTest extends TestCase
 {
     private Composer $composer;
 
@@ -67,20 +65,20 @@ final class WebrootInstallerTest extends TestCase
      */
     public function testSupports($type, $expected): void
     {
-        $installer = new WebrootInstaller($this->io, $this->composer);
+        $installer = new ExtensionInstaller($this->io, $this->composer);
         $this->assertSame($expected, $installer->supports($type), sprintf('Failed to show support for %s', $type));
     }
 
     public function dataForTestSupport()
     {
         return [
-            [WebrootInstaller::INSTALLER_TYPE, true],
+            [ExtensionInstaller::INSTALLER_TYPE, true],
         ];
     }
 
     public function testWebrootInstallPath()
     {
-        $installer = new WebrootInstaller($this->io, $this->composer);
+        $installer = new ExtensionInstaller($this->io, $this->composer);
         $package = new Package('nopenopenope/webroot-package', '1.0.0', '1.0.0');
         $package->setType('webroot');
 
@@ -101,7 +99,7 @@ final class WebrootInstallerTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The root package is not configured properly.');
-        $installer = new WebrootInstaller($this->io, $this->composer);
+        $installer = new ExtensionInstaller($this->io, $this->composer);
         $package = new Package('nopenopenope/webroot-package', '1.0.0', '1.0.0');
         $package->setType('webroot');
         $installer->getInstallPath($package);
@@ -109,7 +107,7 @@ final class WebrootInstallerTest extends TestCase
 
     public function testGetMultipleWebrootPackagesException(): void
     {
-        $installer = new WebrootInstaller($this->io, $this->composer);
+        $installer = new ExtensionInstaller($this->io, $this->composer);
         $package1 = new Package('nopenopenope/webroot-package', '1.0.0', '1.0.0');
         $package2 = new Package('nopenopenope/another-webroot-package', '1.0.0', '1.0.0');
 
@@ -134,7 +132,7 @@ final class WebrootInstallerTest extends TestCase
 
     public function testItThrowsAnExceptionWhenNothingIsSetup(): void
     {
-        $installer = new WebrootInstaller($this->io, $this->composer);
+        $installer = new ExtensionInstaller($this->io, $this->composer);
         $package1 = new Package('nopenopenope/webroot-package', '1.0.0', '1.0.0');
 
         $this->expectException(InvalidArgumentException::class);

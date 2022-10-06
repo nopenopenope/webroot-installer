@@ -1,2 +1,8 @@
 ./docker
+./vendor
+docker-compose.yml
+LICENSE
+composer.lock
+.travis.yml
+.gitignore
 !./docker/build/php/etc/20-xdebug.ini

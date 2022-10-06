@@ -23,4 +23,6 @@ ADD ./docker/build/php/etc/20-xdebug.ini /usr/local/etc/php/conf.d/20-xdebug.ini
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 WORKDIR /var/www/html
 
+COPY . /var/www/html
+
 CMD tail -F /var/www/html/var/*

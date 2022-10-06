@@ -20,7 +20,9 @@
         }
     },
     "extra": {
-        "class": "NopeNopeNope\\Composer\\WebrootInstaller"
+        "class": [
+            "ExtensionInstaller"
+        ]
     },
     "require": {
         "php": "^8.1"

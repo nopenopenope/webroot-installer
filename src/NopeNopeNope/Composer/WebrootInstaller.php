@@ -4,42 +4,36 @@ declare(strict_types=1);
 
 namespace NopeNopeNope\Composer;
 
-use Composer\Package\Link;
-use Composer\Package\PackageInterface;
-use Composer\Installer\LibraryInstaller;
-use InvalidArgumentException;
-use Throwable;
+use Composer\Composer;
+use Composer\IO\IOInterface;
+use Composer\Plugin\PluginInterface;
 
-final class WebrootInstaller extends LibraryInstaller
+final class WebrootInstaller implements PluginInterface
 {
-    public const ERROR_MSG = 'Only one package can be installed into the configured webroot.';
+    private const EXTENSIONS = [
+        ExtensionInstaller::class
+    ];
 
-    public const INSTALLER_TYPE = 'webroot';
+    private array $installers = [];
 
-    public function getInstallPath(PackageInterface $package): ?string
+    public function activate(Composer $composer, IOInterface $io)
     {
-        $prettyName = $package->getPrettyName();
-        try {
-            if ($this->composer->getPackage()) {
-                $extra = $this->composer->getPackage()->getExtra();
-
-                if (!empty($extra['webroot-dir']) && !empty($extra['webroot-package']) && $extra['webroot-package'] === $prettyName) {
-                    return $extra['webroot-dir'];
-                } else {
-                    throw new InvalidArgumentException(self::ERROR_MSG);
-                }
-            }
-        } catch (Throwable $e) {
-            if($e->getMessage() === self::ERROR_MSG) {
-                throw $e;
-            }
-
-            throw new InvalidArgumentException('The root package is not configured properly.');
+        foreach(self::EXTENSIONS as $extension) {
+            $installer = new $extension($io, $composer);
+            $composer->getInstallationManager()->addInstaller($installer);
+            $this->installers[] = $installer;
         }
     }
 
-    public function supports($packageType): bool
+    public function deactivate(Composer $composer, IOInterface $io)
     {
-        return $packageType === self::INSTALLER_TYPE;
+        foreach ($this->installers as $installer) {
+            $composer->getInstallationManager()->removeInstaller($installer);
+        }
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        return;
     }
 }
