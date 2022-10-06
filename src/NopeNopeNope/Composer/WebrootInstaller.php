@@ -34,6 +34,5 @@ final class WebrootInstaller implements PluginInterface
 
     public function uninstall(Composer $composer, IOInterface $io)
     {
-        return;
     }
 }
