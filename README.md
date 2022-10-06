@@ -1,7 +1,5 @@
 # A Webroot [Composer](http://getcomposer.org) Library Installer
 
-[![Build Status](https://travis-ci.org/fancyguy/webroot-installer.png?branch=master)](https://travis-ci.org/fancyguy/webroot-installer)
-
 This is for PHP packages that support composer to configure in their `composer.json`.  It will
 allow a root package to define a webroot directory and webroot package and magically install it
 in the correct location.
@@ -10,12 +8,16 @@ in the correct location.
 
 ``` json
 {
-    "name": "fancyguy/www-fancyguy-com",
-    "description": "Package to build www.fancyguy.com",
+    "name": "nopenopenope/www-mysite-com",
+    "description": "Webroot Installer made for Composer v2",
     "authors": [
         {
             "name": "Steve Buzonas",
             "email": "steve@fancyguy.com"
+        },
+        {
+            "name": "Maximilian Graf Schimmelmann",
+            "email": "webroot@schimmelmann.org"
         }
     ],
     "repositories": [
@@ -24,19 +26,19 @@ in the correct location.
             "package": {
                 "name": "wordpress/wordpress",
                 "type": "webroot",
-                "version": "4.5.1",
+                "version": "5.9.2",
                 "dist": {
                     "type": "zip",
-                    "url": "https://wordpress.org/wordpress-4.5.1-no-content.zip"
+                    "url": "https://wordpress.org/wordpress-5.9.2-no-content.zip"
                 },
                 "require": {
-                    "fancyguy/webroot-installer": "^1.0"
+                    "nopenopenope/webroot-installer": "^1.0"
                 }
             }
         }
     ],
     "require": {
-        "wordpress/wordpress": "4.5.*"
+        "wordpress/wordpress": "^5.9"
     },
     "extra": {
         "webroot-dir": "content",

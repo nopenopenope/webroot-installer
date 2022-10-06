@@ -1,5 +1,5 @@
 {
-    "name": "fancyguy/webroot-installer",
+    "name": "nopenopenope/webroot-installer",
     "type": "composer-installer",
     "license": "BSD-3-Clause",
     "description": "A composer installer for libraries that live in an application webroot.",
@@ -7,17 +7,23 @@
         {
             "name": "Steve Buzonas",
             "email": "steve@fancyguy.com"
+        },
+        {
+            "name": "Maximilian Graf Schimmelmann",
+            "email": "webroot@schimmelmann.org"
         }
     ],
-    "homepage": "http://fancyguy.github.com/webroot-installer/",
+    "homepage": "https://github.com/nopenopenope/webroot-installer",
     "autoload": {
-        "psr-0": { "FancyGuy\\Composer\\": "src/" }
+        "psr-4": {
+            "NopeNopeNope\\": "src/NopeNopeNope"
+        }
     },
     "extra": {
-        "class": "FancyGuy\\Composer\\WebrootInstaller"
+        "class": "NopeNopeNope\\Composer\\WebrootInstaller"
     },
     "require-dev": {
-        "composer/composer": "1.0.*@dev",
-        "phpunit/phpunit": "3.7.*"
+        "composer/composer": "^2",
+        "phpunit/phpunit": "^9"
     }
 }

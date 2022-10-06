@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 include __DIR__ . '/functions.php';
 
 if ((!$loader = includeIfExists(__DIR__ . '/../vendor/autoload.php'))

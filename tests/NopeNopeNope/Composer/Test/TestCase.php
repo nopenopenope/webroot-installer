@@ -1,24 +1,15 @@
 <?php
 
-/*
- * This file is part of Composer.
- *
- * (c) Nils Adermann <naderman@naderman.de>
- *     Jordi Boggiano <j.boggiano@seld.be>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
-namespace FancyGuy\Composer\Test;
+namespace NopeNopeNope\Composer\Test;
 
 use Composer\Package\Version\VersionParser;
 use Composer\Package\Package;
 use Composer\Package\AliasPackage;
-use Composer\Package\LinkConstraint\VersionConstraint;
 use Composer\Util\Filesystem;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     private static $parser;
 
@@ -29,14 +20,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         }
 
         return self::$parser;
-    }
-
-    protected function getVersionConstraint($operator, $version)
-    {
-        return new VersionConstraint(
-            $operator,
-            self::getVersionParser()->normalize($version)
-        );
     }
 
     protected function getPackage($name, $version)
