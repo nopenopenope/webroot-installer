@@ -21,7 +21,7 @@
     },
     "extra": {
         "class": [
-            "NopeNopeNope\\Composer\\WebrootInstaller",
+            "NopeNopeNope\\Composer\\WebrootInstaller"
         ]
     },
     "require": {
