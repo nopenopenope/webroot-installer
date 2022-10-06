@@ -13,12 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: php:8.1-cli-buster
+      volumes:
+        - ./:/var/www/html
     steps:
     - uses: actions/checkout@v3
     - name: Set Up Container and run tests
       run: |
-          RUN apt update && \
-              apt install --no-install-recommends --assume-yes --quiet git \
+          apt update && \
+            apt install --no-install-recommends --assume-yes --quiet git \
             software-properties-common \
             tar \
             vim \
@@ -30,12 +32,11 @@ jobs:
             zlib1g-dev \
             libzip-dev
 
-          RUN docker-php-ext-install zip
-          RUN pecl channel-update pecl.php.net
+          docker-php-ext-install zip
 
-          COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
-          WORKDIR /var/www/html
-
-          COPY . /var/www/html
-
-          CMD composer install && vendor/bin/phpunit
+          curl -sS https://getcomposer.org/installer | php 
+          mv composer.phar /usr/local/bin/composer
+          chmod +x /usr/local/bin/composer
+          
+          cd /var/www/html
+          composer install && vendor/bin/phpunit
