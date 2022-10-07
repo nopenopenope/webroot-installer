@@ -29,6 +29,8 @@ If you want to add this updated fork to your `composer.json`, you have to add th
 ],
 ```
 
+Also, make sure to mark your project as `"type": "webroot"`, otherwise this plugin won't know that you support it.
+
 Afterwards, you can proceed with the regular require command:
 ``` bash
 composer require nopenopenope/webroot-installer:8.1.11
@@ -53,7 +55,7 @@ composer require nopenopenope/webroot-installer:8.1.11
     ],
     "repositories": [
         {
-            "type": "project",
+            "type": "package",
             "package": {
                 "name": "wordpress/wordpress",
                 "type": "webroot",

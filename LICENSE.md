@@ -3,6 +3,8 @@
 **Note**: This is the original Licence of the project that this project is a fork of. I removed the licence from the PHP
 classes and unified it here. The licence is still completely intact and must be respected.
 
+### Original License
+
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 

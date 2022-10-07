@@ -69,7 +69,7 @@ final class ExtensionInstallerTest extends TestCase
         $this->assertSame($expected, $installer->supports($type), sprintf('Failed to show support for %s', $type));
     }
 
-    public function dataForTestSupport()
+    public function dataForTestSupport(): array
     {
         return [
             [ExtensionInstaller::INSTALLER_TYPE, true],
@@ -80,16 +80,14 @@ final class ExtensionInstallerTest extends TestCase
     {
         $installer = new ExtensionInstaller($this->io, $this->composer);
         $package = new Package('nopenopenope/webroot-package', '1.0.0', '1.0.0');
-        $package->setType('webroot');
+        $package->setType('project');
 
         $consumerPackage = new RootPackage('foo/bar', '1.0.0', '1.0.0');
         $this->composer->setPackage($consumerPackage);
-        $consumerPackage->setExtra(
-            array(
-                'webroot-dir' => 'content',
-                'webroot-package' => 'nopenopenope/webroot-package',
-            )
-        );
+        $consumerPackage->setExtra([
+            'webroot-dir' => 'content',
+            'webroot-package' => 'nopenopenope/webroot-package',
+        ]);
 
         $result = $installer->getInstallPath($package);
         $this->assertEquals('content', $result);
